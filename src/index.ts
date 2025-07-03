@@ -1,7 +1,7 @@
 import WebSocket from "ws";
 import http from "http"
 import { WebSocketServer } from "ws";
-import { error } from "console";
+
 
 
 const server = http.createServer(function(request:any, response:any){
@@ -12,18 +12,18 @@ const server = http.createServer(function(request:any, response:any){
 const wss = new WebSocketServer({server})
 
 wss.on("connection",function connection(ws){
-    ws.on("error",console.log(error));
+      ws.on("error",(err)=>console.log("error"+err));
 
-    ws.on("message",function message(data,isBinary){
+    ws.on("message",function message(data){
         wss.clients.forEach(function each(client){
             if(client.readyState=== WebSocket.OPEN){
-                client.send(data,{binary:isBinary})
+                client.send(data)
             }
         });
     });
     ws.send('Message from server')
 })
 
-server.listen(8080,function(){
+server.listen(3000,function(){
     console.log((new Date())+'server is running on port 8080')
 })
