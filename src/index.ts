@@ -25,5 +25,5 @@ wss.on("connection",function connection(ws){
 })
 
 server.listen(8080,function(){
-    console.log((new Date())+'server is runnin ')
+    console.log((new Date())+'server is running on port 8080')
 })
